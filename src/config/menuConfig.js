@@ -6,17 +6,17 @@ const menuList = [
     isPublic: true, // 公开的
   },
   {
-    title: '商品',
+    title: '质量管理',
     key: '/products',
     icon: 'appstore',
     children: [ // 子菜单列表
       {
-        title: '品类管理',
+        title: '毛坯管理',
         key: '/category',
         icon: 'bars'
       },
       {
-        title: '商品管理',
+        title: '管理',
         key: '/product',
         icon: 'tool'
       },
@@ -35,7 +35,7 @@ const menuList = [
   },
 
   {
-    title: '图形图表',
+    title: '年月日统计报表图表',
     key: '/charts',
     icon: 'area-chart',
     children: [
