@@ -4,6 +4,7 @@ import { Form, Input, Icon, Button, message } from 'antd'
 import './login.less'
 import logo from '../../assets/images/logo.png'
 import memoryUtils from '../../utils/memoryUtils'
+import storageUtils from '../../utils/storageUtils'
 import { reqLogin } from '../../api'
 const Item = Form.Item
 /*登陆路由组件*/
@@ -23,7 +24,9 @@ class Login extends Component {
                     // 提示登录成功
                     message.success(' 登录成功', 2)
                     // 保存用户登录信息
-                    memoryUtils.user = result.data
+                    const user = result.data
+                    memoryUtils.user = user//保存在内存中
+                    storageUtils.saveUser(user)//保存在local中
                     // 跳转到主页面
                     this.props.history.replace('/')
                 } else {
@@ -54,9 +57,9 @@ class Login extends Component {
         }
     }
     render() {
-        // if (memoryUtils.user && memoryUtils.user._id) {
-        //     return <Redirect to='/home'/>
-        //     }
+        if (memoryUtils.user && memoryUtils.user._id) {
+            return <Redirect to='/home' />
+        }
         const { getFieldDecorator } = this.props.form
         return (
             <div className='login'>
