@@ -16,16 +16,18 @@ class Header extends Component {
     state = {
         sysTime: formateDate(Date.now()),
         dayPictureUrl: '', // 天气图片的 url
-        weather: ''
+        weather: '',
+        city: ''
     }
     /*
     发异步 ajax 获取天气数据并更新状态
     */
     getWeather = async () => {
-        const { dayPictureUrl, weather } = await reqWeather(' 北京')
+        const { dayPictureUrl, weather, city } = await reqWeather()
         this.setState({
             dayPictureUrl,
-            weather
+            weather,
+            city,
         })
     }
     /*
@@ -84,7 +86,7 @@ class Header extends Component {
         clearInterval(this.intervalId)
     }
     render() {
-        const { sysTime, dayPictureUrl, weather } = this.state
+        const { sysTime, dayPictureUrl, city, weather } = this.state
         // 得到当前用户
         const user = memoryUtils.user
         // 得到当前请求的路径
@@ -100,10 +102,11 @@ class Header extends Component {
                 <div className="header-bottom">
                     <div className="header-bottom-left">{title}</div>
                     <div className="header-bottom-right">
-                        <span>{sysTime}</span>
+                        <span style={{ marginRight: '15px' }}>{sysTime}</span>
                         {/* <img src={dayPictureUrl} alt="weather" /> */}
+                        <span style={{ marginRight: '10px' }}>{city}</span>
+                        <span style={{ marginRight: '10px' }}>{weather}</span>
                         <img src={weatherlog} alt="weather" />
-                        <span>{weather}</span>
                     </div>
                 </div>
             </div>
