@@ -16,7 +16,7 @@ const menuList = [
         icon: 'bars'
       },
       {
-        title: '管理',
+        title: '三坐标监测',
         key: '/product',
         icon: 'tool'
       },

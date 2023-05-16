@@ -86,7 +86,7 @@ class Header extends Component {
         clearInterval(this.intervalId)
     }
     render() {
-        const { sysTime, dayPictureUrl, city, weather } = this.state
+        const { sysTime, city, weather } = this.state
         // 得到当前用户
         const user = memoryUtils.user
         // 得到当前请求的路径

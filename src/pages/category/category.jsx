@@ -43,6 +43,7 @@ export default class Category extends Component {
             const categorys = result.data
             if (parentId === '0') {
                 // 更新一级分类列表
+                console.log('已经请求得到了列表返回来的数据')
                 this.setState({
                     categorys
                 })
@@ -107,6 +108,7 @@ export default class Category extends Component {
     addCategory = async () => {
         // 得到数据
         const { parentId, categoryName } = this.form.getFieldsValue()
+        console.log('parentID和categoryName的数据', parentId, categoryName)
         // 关闭对话框
         this.setState({
             showStatus: 0
@@ -114,7 +116,8 @@ export default class Category extends Component {
         // 重置表单
         this.form.resetFields()
         // 异步请求添加分类
-        const result = await reqAddCategory(categoryName, parentId)
+        const result = await reqAddCategory(parentId, categoryName)
+        console.log('异步请求之后parentID和categoryName的数据', parentId, categoryName)
         if (result.status === 0) {
             /*
             添加一级分类
