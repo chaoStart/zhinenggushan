@@ -16,7 +16,7 @@ export default class ProductDetail extends Component {
     异步获取当前产品对应的分类名称
     */
     getCategoryName = async () => {
-        console.log('this.props.location.state里面有啥', this.props.location.state)
+        console.log('this.props.location.state返回数据', this.props.location.state)
         const { categoryId, pCategoryId } = this.props.location.state
         if (pCategoryId === '0') {
             // 获取一级分类名称

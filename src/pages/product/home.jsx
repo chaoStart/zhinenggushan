@@ -11,6 +11,7 @@ import {
 import LinkButton from '../../components/link-button'
 import { reqProducts, reqSearchProducts, reqUpdateProductStatus } from '../../api'
 import { PAGE_SIZE } from '../../utils/constants'
+
 const Option = Select.Option
 /*
 商品管理的主界面路由
@@ -90,16 +91,14 @@ export default class ProductHome extends Component {
     getProducts = async (pageNum) => {
         this.pageNum = pageNum
         const { searchType, searchName } = this.state
+        console.log('看看页面和搜索类型', pageNum, '-->', searchName, '-->', searchType)
         let result
         if (searchName) { // 搜索分页
-            result = await reqSearchProducts({
-                pageNum, pageSize: PAGE_SIZE, searchType,
-                searchName
-            })
+            result = await reqSearchProducts({ pageNum, pageSize: PAGE_SIZE, searchType, searchName })
         } else { // 一般分页
             result = await reqProducts(pageNum, PAGE_SIZE)
         }
-        console.log('getProducts()', result)
+        console.log('getProducts()分页列表请求回来的数据:', result)
         if (result.status === 0) {
             const { total, list } = result.data
             this.setState({
@@ -119,20 +118,23 @@ export default class ProductHome extends Component {
         const title = (
             <span>
                 <Select value={searchType} onChange={value => this.setState({
-                    searchType:
-                        value
+                    searchType: value
                 })}>
                     <Option key='productName' value='productName'>按名称搜索</Option>
                     <Option key='productDesc' value='productDesc'>按描述搜索</Option>
                 </Select>
                 <Input style={{ width: 150, marginLeft: 10, marginRight: 10 }} placeholder='关键字'
                     onChange={(e) => this.setState({ searchName: e.target.value })} />
+                {/* 这边getProducts(1)是什么都不输入的时候，点击自动跳转到默认的第1页 */}
                 <Button type='primary' onClick={() => this.getProducts(1)}>搜索</Button>
             </span>
         )
         const extra = (
-            <Button type='primary' style={{ float: 'right' }} onClick={() =>
-                this.props.history.push('/product/addupdate')}>
+            <Button type='primary' style={{ float: 'right' }} onClick={() => {
+                console.log('能点击进入product/addupdate子路由页面')
+                this.props.history.push('/product/addupdate')
+            }
+            }>
                 <Icon type='plus' />
                 添加商品
             </Button>
