@@ -7,7 +7,7 @@ import { reqWeather } from '../../api'
 import { formateDate } from '../../utils/dateUtils'
 import memoryUtils from '../../utils/memoryUtils'
 import storageUtils from '../../utils/storageUtils'
-import weatherlog from '../../assets/images/weather.jpg'
+// import weatherlog from '../../assets/images/weather.jpg'
 import './index.less'
 /*
 头部组件
@@ -17,16 +17,18 @@ class Header extends Component {
         sysTime: formateDate(Date.now()),
         dayPictureUrl: '', // 天气图片的 url
         weather: '',
+        temperature: '',
         city: ''
     }
     /*
     发异步 ajax 获取天气数据并更新状态
     */
     getWeather = async () => {
-        const { dayPictureUrl, weather, city } = await reqWeather()
+        const { dayPictureUrl, weather, temperature, city } = await reqWeather()
         this.setState({
             dayPictureUrl,
             weather,
+            temperature,
             city,
         })
     }
@@ -86,7 +88,8 @@ class Header extends Component {
         clearInterval(this.intervalId)
     }
     render() {
-        const { sysTime, city, weather } = this.state
+        const { sysTime, city, weather, temperature } = this.state
+        // console.log('this.state', this.state)
         // 得到当前用户
         const user = memoryUtils.user
         // 得到当前请求的路径
@@ -106,7 +109,8 @@ class Header extends Component {
                         {/* <img src={dayPictureUrl} alt="weather" /> */}
                         <span style={{ marginRight: '10px' }}>{city}</span>
                         <span style={{ marginRight: '10px' }}>{weather}</span>
-                        <img src={weatherlog} alt="weather" />
+                        <span style={{ marginRight: '10px' }}>温度: {temperature}℃</span>
+                        {/* <img src={weatherlog} alt="weather" /> */}
                     </div>
                 </div>
             </div>

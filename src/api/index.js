@@ -36,8 +36,8 @@ export function reqWeather() {
         // resolve({ dayPictureUrl, weather })
         console.log('返回数据了吗？')
         console.log('response是什么', response.lives[0])
-        const { city, weather } = response.lives[0]
-        resolve({ city, weather })
+        const { city, weather, temperature } = response.lives[0]
+        resolve({ city, weather, temperature })
       } else {
         alert(' 获取天气信息失败')
       }
