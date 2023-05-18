@@ -1,38 +1,44 @@
 import React, { Component } from 'react'
-import {
-    Form,
-    Input,
-    Icon,
-    Button,
-} from 'antd'
-import logo from '../../assets/images/logo.png'
+import { Redirect } from 'react-router-dom'
+import { Form, Input, Icon, Button, message } from 'antd'
 import './login.less'
+import logo from '../../assets/images/logo.png'
+import memoryUtils from '../../utils/memoryUtils'
+import storageUtils from '../../utils/storageUtils'
+import { reqLogin } from '../../api'
 const Item = Form.Item
-/*
-登陆路由组件
-*/
+/*登陆路由组件*/
 class Login extends Component {
-    /*
-    登陆
-    */
+    /*登陆*/
     login = (e) => {
         // 阻止事件默认行为 ( 不提交表单 )
         e.preventDefault()
         // 进行表单所有控件的校验
         this.props.form.validateFields(async (err, values) => {
             if (!err) {
-                // 校验成功
+                // console.log(' 提交登陆的 ajax 请求 ', values)
                 const { username, password } = values
-                console.log(' 提交登陆请求', username, password)
+                const result = await reqLogin(username, password)
+                // console.log('login()', result)
+                if (result.status === 0) {
+                    // 提示登录成功
+                    message.success(' 登录成功', 2)
+                    // 保存用户登录信息
+                    const user = result.data
+                    memoryUtils.user = user//保存在内存中
+                    storageUtils.saveUser(user)//保存在local中
+                    // 跳转到主页面
+                    this.props.history.replace('/')
+                } else {
+                    // 登录失败 , 提示错误
+                    message.error(result.msg)
+                }
             } else {
-                // 校验失败
-                console.log(err)
+                console.log(' 检验失败!')
             }
         })
     }
-    /**
-    * 自定义表单的校验规则
-    */
+    /*** 自定义表单的校验规则*/
     validator = (rule, value, callback) => {
         // console.log(rule, value)
         const length = value && value.length
@@ -51,6 +57,9 @@ class Login extends Component {
         }
     }
     render() {
+        if (memoryUtils.user && memoryUtils.user._id) {
+            return <Redirect to='/home' />
+        }
         const { getFieldDecorator } = this.props.form
         return (
             <div className='login'>

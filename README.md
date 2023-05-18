@@ -1,8 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
+##这边没有数据文件，需要单独用mangoDB Compass可视化文件下载了，
+然后把数据文件(https://pan.baidu.com/s/1sD6q-fZu4kNDeMyiSZwOqQ#list/path=%2F)提取码：[07q3]也导入到mangoDB Compass可视化的软件，
+然后选择刚刚下载好的json文件将它导入进去,就可以将数据库的数据在web界面中显示出来
 
 ### `npm start`
 
