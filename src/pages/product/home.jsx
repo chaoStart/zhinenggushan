@@ -39,11 +39,11 @@ export default class ProductHome extends Component {
     initColumns = () => {
         this.columns = [
             {
-                title: ' 商品名称',
+                title: ' 订单名称',
                 dataIndex: 'name'
             },
             {
-                title: ' 商品描述',
+                title: ' 订单描述',
                 dataIndex: 'desc'
             },
             {
@@ -56,11 +56,11 @@ export default class ProductHome extends Component {
                 width: 100,
                 dataIndex: 'status',
                 render: (status, product) => { // 1: 在售 , 2: 已下架
-                    let btnText = ' 下架'
-                    let statusText = ' 在售'
+                    let btnText = ' 进行中'
+                    let statusText = ' 正在加工'
                     if (status === 2) {
-                        btnText = ' 上架'
-                        statusText = ' 已下架'
+                        btnText = ' 停止'
+                        statusText = ' 已完成订单'
                     }
                     status = status === 1 ? 2 : 1
                     return (
