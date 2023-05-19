@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { List, Icon, Card } from 'antd'
 import { reqCategory } from '../../api'
-// import { BASE_IMG_PATH } from '../../utils/constants'
+import { BASE_IMG_PATH } from '../../utils/constants'
 import LinkButton from "../../components/link-button";
-import Yelun from '../../assets/images/yelun.jpg'
+// import Yelun from '../../assets/images/yelun.jpg'
 /*
 商品详情组件
 */
@@ -90,8 +90,8 @@ export default class ProductDetail extends Component {
                         <span className='right-description'>
                             {
                                 imgs.map(img => (
-                                    // <img src={BASE_IMG_PATH + img} alt="img" key={img} style={imgStyle} />
-                                    <img src={Yelun} alt="img" key={img} style={imgStyle} />
+                                    <img src={BASE_IMG_PATH + img} alt="img" key={img} style={imgStyle} />
+                                    // <img src={Yelun} alt="img" key={img} style={imgStyle} />
                                 ))
                             }
                         </span>
