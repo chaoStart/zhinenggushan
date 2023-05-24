@@ -5,7 +5,7 @@ import { Upload, Icon, Modal, message } from 'antd'
 import { reqDeleteImg } from '../../api'
 import { BASE_IMG_PATH, UPLOAD_IMG_NAME } from '../../utils/constants'
 /*
-管理商品图片的组件 ( 上传 / 删除图片 )
+管理商品图片的组件 ( 上传 / 删除图片 )******
 */
 export default class PicturesWall extends React.Component {
     static propTypes = {
